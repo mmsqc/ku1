@@ -1,0 +1,128 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        #zmian {
+            width: 500px;
+            height: 200px;
+            background: -webkit-linear-gradient(left, #dd2299, #ddff00);
+            margin-bottom: 100px;
+        }
+        
+        #aTime {
+            color: #fff;
+            float: left;
+        }
+        
+        #Tradion {
+            width: 100px;
+            height: 100px;
+            border: 2px solid #fff;
+            border-radius: 100px;
+            float: left;
+            margin: 50px 50px;
+        }
+        
+        #hours {
+            width: 30px;
+            height: 2px;
+            margin: 50px 50px;
+            background: #fff;
+            transform-origin: left bottom;
+        }
+        
+        #minutes {
+            width: 38px;
+            height: 2px;
+            background: #fff;
+            margin: -50px 50px;
+            transform-origin: left bottom;
+            transform: rotate(0deg);
+        }
+        
+        #seconds {
+            width: 45px;
+            height: 1px;
+            background: #fff;
+            margin: 50px 50px;
+            transform-origin: left bottom;
+            transform: rotate(10deg);
+        }
+        #aDate{}
+        #dian {
+            width: 6px;
+            height: 6px;
+            border-radius: 6px;
+            background: #fff;
+            margin: -55px 46px;
+        }
+        
+        #week {
+            color: #fff;
+            padding-top: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="zmian">
+        <div id="Tradion">
+            <div id="hours"></div>
+            <div id="minutes"></div>
+            <div id="seconds"></div>
+            <div id="dian"></div>
+        </div>
+        <h1 id="aTime"></h1>
+        <h3 id="aDate"></h3>
+        <h2 id="week"></h2>
+    </div>
+</body>
+<script type="text/javascript">
+    window.onload = function() {
+        var hours = document.getElementById('hours');
+        var minutes = document.getElementById('minutes');
+        var seconds = document.getElementById('seconds');
+        var aDate = document.getElementById("aDate");
+        var week = document.getElementById('week');
+
+        function addzero(num) {
+            return num >= 10 ? num : '0' + num
+        }
+
+        function times() {
+            var date = new Date();
+            var aTime = document.getElementById('aTime');
+            var str = addzero(date.getHours()) + ":" + addzero(date.getMinutes()) + ":" + addzero(date.getSeconds());
+            aTime.innerHTML = str;
+        }
+        setInterval(times, 1000);
+        times();
+
+        function szhong() {
+            var date = new Date();
+            var num = date.getHours();
+            var num2 = date.getMinutes();
+            var num3 = date.getSeconds();
+            hours.style.transform = "rotate(" + (num * 30 - 90) + "deg)";
+            minutes.style.transform = "rotate(" + (num2 * 6 - 90) + "deg)";
+            seconds.style.transform = "rotate(" + (num3 * 6 - 90) + "deg)";
+        }
+        setInterval(szhong, 1000);
+        szhong();
+    }
+
+    function Adate() {
+        var date = new Date();
+        var arr = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+        var str = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+        aDate.innerHTML = str;
+        var str1 = arr[date.getDay()];
+        week.innerHTML = str1;
+    }
+    Adate();
+</script>
+
+</html>
